@@ -41,12 +41,14 @@ contract Raffle{
     //@dev The duration of the Lottery in seconds
     uint256 private immutable i_interval;
     address payable[] private s_players;
+    uint256 private s_lastTimeStamp;
 
     event RaffleEntred(address indexed player);
 
     constructor (uint256 _entranceFee , uint256 _interval){
         i_interval=_interval;
         entranceFee =_entranceFee;
+        s_lastTimeStamp= block.timestamp;
     }
 
     function enterRaffel()external payable{
@@ -59,7 +61,9 @@ contract Raffle{
     }
     
     function pickUpWinner()external {
-        
+        if((block.timestamp- s_lastTimeStamp) < i_interval){
+            revert();
+        }
     }
 
     /*Getter Functions */
