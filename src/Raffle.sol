@@ -63,7 +63,7 @@ contract Raffle{
     function pickUpWinner()external {
         if((block.timestamp- s_lastTimeStamp) < i_interval){
             revert();
-        }
+        } 
     }
 
     /*Getter Functions */
